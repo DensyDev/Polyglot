@@ -36,3 +36,6 @@ String global = translation.translate(SimpleLanguage.RUS, "local.translation", n
 System.out.println("Translated local message: " + local);
 System.out.println("Translated global message: " + global);
 ```
+
+## Dependency info on Luminia Dev Repo:
+https://repo.luminiadev.com/#/private/com/luminiadev/polyglot
