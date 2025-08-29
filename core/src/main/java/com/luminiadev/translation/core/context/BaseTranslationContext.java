@@ -44,8 +44,18 @@ public class BaseTranslationContext implements TranslationContext {
     }
 
     @Override
-    public void addGlobalParameters(String key, Object value) {
-        this.globalParameters = this.globalParameters.merge(new KeyedTrParameters(Map.of(key, value)));
+    public void addGlobalParameters(Map<String, Object> parameters) {
+        this.globalParameters = this.globalParameters.merge(new KeyedTrParameters(parameters));
+    }
+
+    @Override
+    public void addGlobalParameter(String key, Object value) {
+        this.addGlobalParameters(Map.of(key, value));
+    }
+
+    @Override
+    public Map<Language, Map<String, String>> getGlobalTranslations() {
+        return globalTranslations;
     }
 
     @Override

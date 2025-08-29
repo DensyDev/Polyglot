@@ -38,15 +38,29 @@ public interface TranslationContext {
     /**
      * Adds global parameter available to all translations.
      *
+     * @param parameters the parameters to add
+     */
+    void addGlobalParameters(Map<String, Object> parameters);
+
+    /**
+     * Adds global parameter available to all translations.
+     *
      * @param key the parameter key
      * @param value the parameter value to add
      */
-    void addGlobalParameters(String key, Object value);
+    void addGlobalParameter(String key, Object value);
 
     /**
-     * Gets current global parameters.
+     * Gets all global translations.
      *
-     * @return global parameters
+     * @return global translations
+     */
+    Map<Language, Map<String, String>> getGlobalTranslations();
+
+    /**
+     * Gets global translations for language.
+     *
+     * @return global translations
      */
     Map<String, String> getGlobalTranslations(Language language);
 
