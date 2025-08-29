@@ -11,7 +11,7 @@ java {
 }
 
 allprojects {
-    group = "com.luminiadev.translation"
+    group = "com.luminiadev.polyglot"
     version = "1.0.0-SNAPSHOT"
 }
 
@@ -34,7 +34,7 @@ subprojects {
         publications {
             create<MavenPublication>("maven") {
                 groupId = project.group.toString()
-                artifactId = project.name
+                artifactId = project.name.lowercase()
                 version = project.version.toString()
                 from(components["java"])
             }
