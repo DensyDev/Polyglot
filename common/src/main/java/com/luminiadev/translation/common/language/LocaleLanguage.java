@@ -2,6 +2,9 @@ package com.luminiadev.translation.common.language;
 
 import com.luminiadev.translation.core.language.BaseLanguage;
 
+/**
+ * Built-in languages in standard locale format.
+ */
 public interface LocaleLanguage {
     BaseLanguage EN_US = new BaseLanguage("en_US");
     BaseLanguage EN_GB = new BaseLanguage("en_GB");

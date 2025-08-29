@@ -6,6 +6,9 @@ import com.luminiadev.translation.api.provider.TranslationProvider;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Empty translation provider.
+ */
 public final class EmptyProvider implements TranslationProvider {
 
     @Override

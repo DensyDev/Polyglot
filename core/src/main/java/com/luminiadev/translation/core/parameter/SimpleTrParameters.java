@@ -4,6 +4,9 @@ import com.luminiadev.translation.api.parameter.TrParameters;
 import com.luminiadev.translation.api.parameter.formatter.TrParameterFormatter;
 import lombok.Getter;
 
+/**
+ * Simple indexed translation parameters.
+ */
 @Getter
 public class SimpleTrParameters implements TrParameters {
 

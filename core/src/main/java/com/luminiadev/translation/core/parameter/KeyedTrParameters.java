@@ -7,6 +7,9 @@ import lombok.Getter;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Key-value translation parameters.
+ */
 @Getter
 public class KeyedTrParameters implements TrParameters {
 

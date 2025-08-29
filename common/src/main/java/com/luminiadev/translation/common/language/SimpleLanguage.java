@@ -2,6 +2,9 @@ package com.luminiadev.translation.common.language;
 
 import com.luminiadev.translation.core.language.BaseLanguage;
 
+/**
+ * Built-in languages in a simple format.
+ */
 public interface SimpleLanguage {
     BaseLanguage ENG = new BaseLanguage("eng");
     BaseLanguage GER = new BaseLanguage("ger");

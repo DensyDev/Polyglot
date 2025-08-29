@@ -5,6 +5,10 @@ import com.luminiadev.translation.api.language.LanguageStandard;
 
 import java.util.regex.Pattern;
 
+/**
+ * Simple language standard implementation.
+ * Supports format: "eng", "rus", "ukr" (2-3 letter language codes).
+ */
 public class SimpleLanguageStandard implements LanguageStandard {
     private static final Pattern PATTERN = Pattern.compile("^[a-z]{2,3}$");
 

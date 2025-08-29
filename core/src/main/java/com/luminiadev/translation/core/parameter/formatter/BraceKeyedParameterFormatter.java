@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Formatter for named parameters in the format {key}
+ */
 public class BraceKeyedParameterFormatter implements TrParameterFormatter {
     private static final Pattern PATTERN = Pattern.compile("\\{([^}]+)}");
 

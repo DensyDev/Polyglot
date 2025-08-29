@@ -3,6 +3,9 @@ package com.luminiadev.translation.core.language;
 import com.luminiadev.translation.api.language.Language;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Base implementation of the Language interface.
+ */
 @EqualsAndHashCode
 public class BaseLanguage implements Language {
     private final String languageCode;

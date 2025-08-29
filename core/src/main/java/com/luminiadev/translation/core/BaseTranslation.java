@@ -17,6 +17,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 
+/**
+ * Base implementation of the translation.
+ */
 public class BaseTranslation implements Translation {
 
     private final TranslationContext context;

@@ -7,6 +7,9 @@ import com.luminiadev.translation.core.parameter.SimpleTrParameters;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Formatter for simple parameters in the format [0], [1], [2]...
+ */
 public class BracketSimpleParameterFormatter implements TrParameterFormatter {
     private static final Pattern PATTERN = Pattern.compile("\\[(\\d+)]");
 

@@ -10,6 +10,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * YAML file translation provider.
+ */
 public class YamlFileProvider implements TranslationProvider {
     private final File folder;
     private final LanguageStandard languageStandard;

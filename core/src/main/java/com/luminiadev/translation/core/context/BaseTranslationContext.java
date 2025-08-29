@@ -13,6 +13,9 @@ import com.luminiadev.translation.core.provider.EmptyProvider;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Base implementation of the translation context.
+ */
 public class BaseTranslationContext implements TranslationContext {
 
     private final Map<Language, Map<String, String>> globalTranslations;

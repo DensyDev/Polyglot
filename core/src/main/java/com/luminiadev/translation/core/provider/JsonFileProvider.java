@@ -14,6 +14,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Json file translation provider.
+ */
 public class JsonFileProvider implements TranslationProvider {
     private final File folder;
     private final LanguageStandard languageStandard;
