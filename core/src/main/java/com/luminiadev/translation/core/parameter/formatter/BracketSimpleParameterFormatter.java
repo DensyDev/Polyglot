@@ -2,7 +2,7 @@ package com.luminiadev.translation.core.parameter.formatter;
 
 import com.luminiadev.translation.api.parameter.TrParameters;
 import com.luminiadev.translation.api.parameter.formatter.TrParameterFormatter;
-import com.luminiadev.translation.core.parameter.SimpleParameters;
+import com.luminiadev.translation.core.parameter.SimpleTrParameters;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,7 +12,7 @@ public class BracketSimpleParameterFormatter implements TrParameterFormatter {
 
     @Override
     public String format(String text, TrParameters parameters) {
-        if (!(parameters instanceof SimpleParameters simpleParams)) {
+        if (!(parameters instanceof SimpleTrParameters simpleParams)) {
             return text;
         }
 
@@ -35,7 +35,7 @@ public class BracketSimpleParameterFormatter implements TrParameterFormatter {
 
     @Override
     public Class<? extends TrParameters> getSupportedParameterType() {
-        return SimpleParameters.class;
+        return SimpleTrParameters.class;
     }
 }
 

@@ -1,19 +1,16 @@
 package com.luminiadev.translation.core.parameter;
 
-import com.luminiadev.translation.api.parameter.SimpleTrParameters;
+import com.luminiadev.translation.api.parameter.TrParameters;
 import com.luminiadev.translation.api.parameter.formatter.TrParameterFormatter;
+import lombok.Getter;
 
-public class SimpleParameters implements SimpleTrParameters {
+@Getter
+public class SimpleTrParameters implements TrParameters {
 
     private final Object[] parameters;
 
-    public SimpleParameters(Object... parameters) {
+    public SimpleTrParameters(Object... parameters) {
         this.parameters = parameters;
-    }
-
-    @Override
-    public Object[] getParameters() {
-        return parameters;
     }
 
     @Override

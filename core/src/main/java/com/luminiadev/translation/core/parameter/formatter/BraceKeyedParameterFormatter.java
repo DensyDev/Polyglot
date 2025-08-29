@@ -2,7 +2,7 @@ package com.luminiadev.translation.core.parameter.formatter;
 
 import com.luminiadev.translation.api.parameter.TrParameters;
 import com.luminiadev.translation.api.parameter.formatter.TrParameterFormatter;
-import com.luminiadev.translation.core.parameter.KeyedParameters;
+import com.luminiadev.translation.core.parameter.KeyedTrParameters;
 
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -13,7 +13,7 @@ public class BraceKeyedParameterFormatter implements TrParameterFormatter {
 
     @Override
     public String format(String text, TrParameters parameters) {
-        if (!(parameters instanceof KeyedParameters keyedParams)) {
+        if (!(parameters instanceof KeyedTrParameters keyedParams)) {
             return text;
         }
 
@@ -36,7 +36,7 @@ public class BraceKeyedParameterFormatter implements TrParameterFormatter {
 
     @Override
     public Class<? extends TrParameters> getSupportedParameterType() {
-        return KeyedParameters.class;
+        return KeyedTrParameters.class;
     }
 }
 

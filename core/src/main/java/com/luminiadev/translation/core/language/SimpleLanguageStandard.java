@@ -9,11 +9,6 @@ public class SimpleLanguageStandard implements LanguageStandard {
     private static final Pattern PATTERN = Pattern.compile("^[a-z]{2,3}$");
 
     @Override
-    public String getName() {
-        return "simple";
-    }
-
-    @Override
     public Language parseLanguage(String languageString) {
         if (!matches(languageString)) {
             throw new IllegalArgumentException("Language string doesn't match simple standard: " + languageString);

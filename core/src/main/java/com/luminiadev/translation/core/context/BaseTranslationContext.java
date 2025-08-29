@@ -4,11 +4,10 @@ import com.luminiadev.translation.api.Translation;
 import com.luminiadev.translation.api.context.TranslationContext;
 import com.luminiadev.translation.api.language.Language;
 import com.luminiadev.translation.api.language.LanguageStandard;
-import com.luminiadev.translation.api.parameter.KeyedTrParameters;
 import com.luminiadev.translation.api.provider.TranslationProvider;
 import com.luminiadev.translation.core.BaseTranslation;
 import com.luminiadev.translation.core.language.SimpleLanguageStandard;
-import com.luminiadev.translation.core.parameter.KeyedParameters;
+import com.luminiadev.translation.core.parameter.KeyedTrParameters;
 import com.luminiadev.translation.core.provider.EmptyProvider;
 
 import java.util.HashMap;
@@ -17,12 +16,12 @@ import java.util.Map;
 public class BaseTranslationContext implements TranslationContext {
 
     private final Map<Language, Map<String, String>> globalTranslations;
-    private KeyedParameters globalParameters;
+    private KeyedTrParameters globalParameters;
     private LanguageStandard languageStandard;
 
     public BaseTranslationContext() {
         this.globalTranslations = new HashMap<>();
-        this.globalParameters = new KeyedParameters();
+        this.globalParameters = new KeyedTrParameters();
         this.languageStandard = new SimpleLanguageStandard();
     }
 
@@ -37,15 +36,13 @@ public class BaseTranslationContext implements TranslationContext {
     }
 
     @Override
-    public KeyedTrParameters getGlobalParameters() {
-        return new KeyedParameters(globalParameters.getParameters());
+    public Map<String, Object> getGlobalParameters() {
+        return globalParameters.getParameters();
     }
 
     @Override
-    public void addGlobalParameters(KeyedTrParameters parameters) {
-        if (parameters != null) {
-            this.globalParameters = this.globalParameters.merge(parameters);
-        }
+    public void addGlobalParameters(String key, Object value) {
+        this.globalParameters = this.globalParameters.merge(new KeyedTrParameters(Map.of(key, value)));
     }
 
     @Override

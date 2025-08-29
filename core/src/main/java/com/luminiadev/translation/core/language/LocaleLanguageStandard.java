@@ -10,11 +10,6 @@ public class LocaleLanguageStandard implements LanguageStandard {
     private static final Pattern PATTERN = Pattern.compile("^([a-z]{2})_([A-Z]{2})$");
 
     @Override
-    public String getName() {
-        return "locale";
-    }
-
-    @Override
     public Language parseLanguage(String languageString) {
         Matcher matcher = PATTERN.matcher(languageString);
         if (!matcher.matches()) {

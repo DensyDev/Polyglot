@@ -1,31 +1,28 @@
 package com.luminiadev.translation.core.parameter;
 
-import com.luminiadev.translation.api.parameter.KeyedTrParameters;
+import com.luminiadev.translation.api.parameter.TrParameters;
 import com.luminiadev.translation.api.parameter.formatter.TrParameterFormatter;
+import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class KeyedParameters implements KeyedTrParameters {
+@Getter
+public class KeyedTrParameters implements TrParameters {
 
     private final Map<String, Object> parameters;
 
-    public KeyedParameters() {
+    public KeyedTrParameters() {
         this.parameters = new HashMap<>();
     }
 
-    public KeyedParameters(Map<String, Object> parameters) {
+    public KeyedTrParameters(Map<String, Object> parameters) {
         this.parameters = new HashMap<>(parameters != null ? parameters : Map.of());
     }
 
-    public KeyedParameters put(String key, Object value) {
+    public KeyedTrParameters put(String key, Object value) {
         parameters.put(key, value);
         return this;
-    }
-
-    @Override
-    public Map<String, Object> getParameters() {
-        return parameters;
     }
 
     @Override
@@ -33,11 +30,17 @@ public class KeyedParameters implements KeyedTrParameters {
         return formatter.format(text, this);
     }
 
-    public KeyedParameters merge(KeyedTrParameters other) {
+    /**
+     * Merges the current KeyedTrParameters with another KeyedTrParameters.
+     *
+     * @param other Another KeyedTrParameters
+     * @return Merged KeyedTrParameters
+     */
+    public KeyedTrParameters merge(KeyedTrParameters other) {
         if (other == null) return this;
 
         Map<String, Object> merged = new HashMap<>(other.getParameters());
         merged.putAll(this.parameters);
-        return new KeyedParameters(merged);
+        return new KeyedTrParameters(merged);
     }
 }

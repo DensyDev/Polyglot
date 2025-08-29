@@ -3,13 +3,11 @@ package com.luminiadev.translation.core;
 import com.luminiadev.translation.api.Translation;
 import com.luminiadev.translation.api.context.TranslationContext;
 import com.luminiadev.translation.api.language.Language;
-import com.luminiadev.translation.api.parameter.KeyedTrParameters;
-import com.luminiadev.translation.api.parameter.SimpleTrParameters;
 import com.luminiadev.translation.api.parameter.TrParameters;
 import com.luminiadev.translation.api.parameter.formatter.TrParameterFormatter;
 import com.luminiadev.translation.api.provider.TranslationProvider;
-import com.luminiadev.translation.core.parameter.KeyedParameters;
-import com.luminiadev.translation.core.parameter.SimpleParameters;
+import com.luminiadev.translation.core.parameter.KeyedTrParameters;
+import com.luminiadev.translation.core.parameter.SimpleTrParameters;
 import com.luminiadev.translation.core.parameter.formatter.BraceKeyedParameterFormatter;
 import com.luminiadev.translation.core.parameter.formatter.BracketSimpleParameterFormatter;
 
@@ -60,7 +58,7 @@ public class BaseTranslation implements Translation {
 
     @Override
     public String translate(Language language, String key, Object... parameters) {
-        return translate(language, key, new SimpleParameters(parameters));
+        return translate(language, key, new SimpleTrParameters(parameters));
     }
 
     private Language resolveLanguage(Language requestedLanguage) {
@@ -132,11 +130,11 @@ public class BaseTranslation implements Translation {
         KeyedTrParameters keyedParams;
 
         if (parameters instanceof KeyedTrParameters keyedTrParameters) {
-            KeyedParameters merged = new KeyedParameters(context.getGlobalParameters().getParameters());
+            KeyedTrParameters merged = new KeyedTrParameters(context.getGlobalParameters());
             merged = merged.merge(keyedTrParameters);
             keyedParams = merged;
         } else {
-            keyedParams = context.getGlobalParameters();
+            keyedParams = new KeyedTrParameters(context.getGlobalParameters());
         }
 
         if (keyedParams != null && !keyedParams.getParameters().isEmpty()) {

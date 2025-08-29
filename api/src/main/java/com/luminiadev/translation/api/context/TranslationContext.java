@@ -3,7 +3,6 @@ package com.luminiadev.translation.api.context;
 import com.luminiadev.translation.api.Translation;
 import com.luminiadev.translation.api.language.Language;
 import com.luminiadev.translation.api.language.LanguageStandard;
-import com.luminiadev.translation.api.parameter.KeyedTrParameters;
 import com.luminiadev.translation.api.provider.TranslationProvider;
 
 import java.util.Map;
@@ -14,9 +13,9 @@ public interface TranslationContext {
 
     Translation createTranslation();
 
-    KeyedTrParameters getGlobalParameters();
+    Map<String, Object> getGlobalParameters();
 
-    void addGlobalParameters(KeyedTrParameters parameters);
+    void addGlobalParameters(String key, Object value);
 
     Map<String, String> getGlobalTranslations(Language language);
 
