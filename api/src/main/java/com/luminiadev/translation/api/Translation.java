@@ -26,6 +26,4 @@ public interface Translation {
     <T extends TrParameters> void setParameterFormatter(Class<T> parameterType, TrParameterFormatter formatter);
 
     Set<Language> getAvailableLanguages();
-
-
 }

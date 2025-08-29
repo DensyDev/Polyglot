@@ -21,6 +21,8 @@ public interface TranslationContext {
 
     void addGlobalTranslations(Language language, Map<String, String> translations);
 
+    void addGlobalTranslation(Language language, String key, String translation);
+
     LanguageStandard getLanguageStandard();
 
     void setLanguageStandard(LanguageStandard standard);

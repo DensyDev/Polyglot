@@ -60,6 +60,14 @@ public class BaseTranslationContext implements TranslationContext {
     }
 
     @Override
+    public void addGlobalTranslation(Language language, String key, String translation) {
+        if (language == null || key == null || translation == null) {
+            return;
+        }
+        this.addGlobalTranslations(language, Map.of(key, translation));
+    }
+
+    @Override
     public LanguageStandard getLanguageStandard() {
         return languageStandard;
     }
