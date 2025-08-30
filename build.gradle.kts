@@ -4,15 +4,15 @@ plugins {
     id("java")
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-}
-
 allprojects {
     group = "com.luminiadev.polyglot"
     version = "1.0.1-SNAPSHOT"
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
 }
 
 subprojects {
