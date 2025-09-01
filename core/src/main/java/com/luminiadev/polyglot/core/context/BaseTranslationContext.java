@@ -20,6 +20,7 @@ public class BaseTranslationContext implements TranslationContext {
 
     private final Map<Language, Map<String, String>> globalTranslations;
     private KeyedTrParameters globalParameters;
+    private Language defaultLanguage;
     private LanguageStandard languageStandard;
 
     public BaseTranslationContext() {
@@ -78,6 +79,16 @@ public class BaseTranslationContext implements TranslationContext {
             return;
         }
         this.addGlobalTranslations(language, Map.of(key, translation));
+    }
+
+    @Override
+    public Language getDefaultLanguage() {
+        return defaultLanguage;
+    }
+
+    @Override
+    public void setDefaultLanguage(Language defaultLanguage) {
+        this.defaultLanguage = defaultLanguage;
     }
 
     @Override
