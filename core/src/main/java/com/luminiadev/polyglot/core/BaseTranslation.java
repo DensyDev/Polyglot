@@ -23,7 +23,7 @@ import java.util.function.Function;
 public class BaseTranslation implements Translation {
 
     private final TranslationContext context;
-    private final Map<Language, Map<String, String>> localTranslations;
+    private final Map<Language, Map<String, String>> translations;
     private final Map<Class<? extends TrParameters>, TrParameterFormatter> formatters;
 
     private Language defaultLanguage;
@@ -31,15 +31,17 @@ public class BaseTranslation implements Translation {
 
     public BaseTranslation(TranslationContext context, TranslationProvider provider) {
         this.context = context;
-        this.localTranslations = new HashMap<>();
+        this.translations = new HashMap<>();
         this.formatters = new HashMap<>();
 
         this.formatters.put(SimpleTrParameters.class, new BracketSimpleParameterFormatter());
         this.formatters.put(KeyedTrParameters.class, new BraceKeyedParameterFormatter());
 
         if (provider != null) {
-            localTranslations.putAll(provider.getTranslations());
+            translations.putAll(provider.getTranslations());
         }
+
+        this.defaultLanguage = context.getDefaultLanguage();
     }
 
     @Override
@@ -68,6 +70,7 @@ public class BaseTranslation implements Translation {
         if (this.isLanguageAvailable(requestedLanguage)) {
             return requestedLanguage;
         }
+        Language defaultLanguage = this.defaultLanguage != null ? this.defaultLanguage : context.getDefaultLanguage();
         if (this.isLanguageAvailable(defaultLanguage)) {
             return defaultLanguage;
         }
@@ -76,7 +79,7 @@ public class BaseTranslation implements Translation {
 
     private boolean isLanguageAvailable(Language language) {
         if (language == null) return false;
-        if (localTranslations.containsKey(language) || !context.getGlobalTranslations(language).isEmpty()) {
+        if (translations.containsKey(language) || !context.getGlobalTranslations(language).isEmpty()) {
             return true;
         }
         return this.getAvailableLanguages().stream().anyMatch(language::isCompatibleWith);
@@ -87,7 +90,7 @@ public class BaseTranslation implements Translation {
     }
 
     private String findTranslation(Language language, String key) {
-        String result = this.getTranslationFromMap(localTranslations.get(language), key);
+        String result = this.getTranslationFromMap(translations.get(language), key);
         if (result != null) {
             return result;
         }
@@ -97,7 +100,7 @@ public class BaseTranslation implements Translation {
             return result;
         }
 
-        for (Map.Entry<Language, Map<String, String>> entry : localTranslations.entrySet()) {
+        for (Map.Entry<Language, Map<String, String>> entry : translations.entrySet()) {
             if (language.isCompatibleWith(entry.getKey())) {
                 result = this.getTranslationFromMap(entry.getValue(), key);
                 if (result != null) {
@@ -170,7 +173,7 @@ public class BaseTranslation implements Translation {
         if (language == null || key == null || value == null) {
             return;
         }
-        localTranslations.computeIfAbsent(language, k -> new HashMap<>()).put(key, value);
+        translations.computeIfAbsent(language, k -> new HashMap<>()).put(key, value);
     }
 
     @Override
@@ -182,9 +185,9 @@ public class BaseTranslation implements Translation {
 
     @Override
     public Set<Language> getAvailableLanguages() {
-        Set<Language> languages = new HashSet<>(localTranslations.keySet());
+        Set<Language> languages = new HashSet<>(translations.keySet());
 
-        for (Language lang : localTranslations.keySet()) {
+        for (Language lang : translations.keySet()) {
             if (!context.getGlobalTranslations(lang).isEmpty()) {
                 languages.add(lang);
             }

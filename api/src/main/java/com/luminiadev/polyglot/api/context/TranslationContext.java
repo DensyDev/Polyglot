@@ -82,6 +82,20 @@ public interface TranslationContext {
     void addGlobalTranslation(Language language, String key, String translation);
 
     /**
+     * Gets the language by default.
+     *
+     * @return default language
+     */
+    Language getDefaultLanguage();
+
+    /**
+     * Sets the language by default
+     *
+     * @param language language to set
+     */
+    void setDefaultLanguage(Language language);
+
+    /**
      * Gets the current language standard.
      *
      * @return current language standard
