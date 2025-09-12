@@ -3,9 +3,9 @@ package com.luminiadev.polyglot.api;
 import com.luminiadev.polyglot.api.language.Language;
 import com.luminiadev.polyglot.api.parameter.TrParameters;
 import com.luminiadev.polyglot.api.parameter.formatter.TrParameterFormatter;
+import com.luminiadev.polyglot.api.util.FallbackStrategy;
 
 import java.util.Set;
-import java.util.function.Function;
 
 public interface Translation {
 
@@ -19,7 +19,7 @@ public interface Translation {
 
     void setDefaultLanguage(Language language);
 
-    void setFallbackStrategy(Function<String, String> fallbackFunction);
+    void setFallbackStrategy(FallbackStrategy fallbackStrategy);
 
     void addTranslation(Language language, String key, String value);
 
