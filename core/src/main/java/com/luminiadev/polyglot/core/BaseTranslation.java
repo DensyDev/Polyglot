@@ -55,7 +55,7 @@ public class BaseTranslation implements Translation {
         String translation = findTranslation(targetLanguage, key);
 
         if (translation == null) {
-            translation = fallbackStrategy != null ? fallbackStrategy.apply(key) : key;
+            translation = fallbackStrategy != null ? fallbackStrategy.get(key) : key;
         }
 
         return applyParameters(translation, parameters);
