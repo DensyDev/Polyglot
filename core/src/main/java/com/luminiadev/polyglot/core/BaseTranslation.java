@@ -1,5 +1,6 @@
 package com.luminiadev.polyglot.core;
 
+import com.luminiadev.polyglot.api.util.FallbackStrategy;
 import com.luminiadev.polyglot.api.Translation;
 import com.luminiadev.polyglot.api.context.TranslationContext;
 import com.luminiadev.polyglot.api.language.Language;
@@ -15,7 +16,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
 
 /**
  * Base implementation of the translation.
@@ -27,7 +27,7 @@ public class BaseTranslation implements Translation {
     private final Map<Class<? extends TrParameters>, TrParameterFormatter> formatters;
 
     private Language defaultLanguage;
-    private Function<String, String> fallbackStrategy;
+    private FallbackStrategy fallbackStrategy;
 
     public BaseTranslation(TranslationContext context, TranslationProvider provider) {
         this.context = context;
@@ -164,7 +164,7 @@ public class BaseTranslation implements Translation {
     }
 
     @Override
-    public void setFallbackStrategy(Function<String, String> fallbackStrategy) {
+    public void setFallbackStrategy(FallbackStrategy fallbackStrategy) {
         this.fallbackStrategy = fallbackStrategy;
     }
 
