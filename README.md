@@ -1,5 +1,5 @@
 # Polyglot
-Polyglot is an advanced and multifunctional library for localizing strings for Luminia Development projects.
+Polyglot is an advanced and multifunctional library for localizing strings.
 
 ## Example of usage
 ```java
@@ -26,12 +26,24 @@ Translation translation = context.createTranslation(new YamlFileProvider(
         new File("lang"), context.getLanguageStandard()
 ));
 translation.setDefaultLanguage(SimpleLanguage.ENG); // Default language
-translation.setFallbackStrategy(key -> key + "-fallback"); // Fallback strategy for missing localizations
+
+// Strategy for determining the language when the requested language is not available. 
+// For example: return Russian when Ukrainian is not available, instead of the default English.
+translation.setLanguageStrategy(LanguageStrategy.mappings()
+                .put(SimpleLanguage.UKR, SimpleLanguage.RUS)
+                .build());
+// We can also set the default language using `LanguageStrategy.defaultResult(SimpleLanguage.ENG)`.
+
+// Fallback strategy for missing localizations
+// You can also do the same thing this way: `translation.setFallbackStrategy(FallbackStrategy.suffix(“-fallback”));`.
+// Or you can use `FallbackStrategy.keyToKey()` if you want the result to be the key of the missing locale.
+translation.setFallbackStrategy(key -> key + "-fallback");
+
 translation.addTranslation(SimpleLanguage.ENG, "local.translation", "Local message with param [0]"); // Adding local translation
 
 // Translating the messages
 String local = translation.translate(SimpleLanguage.RUS, "local.translation", 1);
-String global = translation.translate(SimpleLanguage.RUS, "local.translation", new KeyedTrParameters().put("local", "Parameter"));
+String global = translation.translate(SimpleLanguage.RUS, "global.translation", new KeyedTrParameters().put("local", "Parameter"));
 
 System.out.println("Translated local message: " + local);
 System.out.println("Translated global message: " + global);
