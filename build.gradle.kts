@@ -12,7 +12,7 @@ java {
 
 allprojects {
     group = "com.luminiadev.polyglot"
-    version = "1.0.4-SNAPSHOT"
+    version = "1.0.5-SNAPSHOT"
 }
 
 subprojects {
