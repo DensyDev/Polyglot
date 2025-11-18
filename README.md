@@ -5,11 +5,14 @@ Polyglot is an advanced and multifunctional library for localizing strings.
 ```java
 import com.luminiadev.polyglot.api.Translation;
 import com.luminiadev.polyglot.api.context.TranslationContext;
+import com.luminiadev.polyglot.api.util.FallbackStrategy;
+import com.luminiadev.polyglot.api.util.LanguageStrategy;
 import com.luminiadev.polyglot.common.language.SimpleLanguage;
 import com.luminiadev.polyglot.core.context.BaseTranslationContext;
 import com.luminiadev.polyglot.core.language.SimpleLanguageStandard;
-import com.luminiadev.polyglot.core.parameter.KeyedTrParameters;
 import com.luminiadev.polyglot.core.provider.YamlFileProvider;
+
+import java.io.File;
 
 // Creating and configuring context
 TranslationContext context = new BaseTranslationContext();
