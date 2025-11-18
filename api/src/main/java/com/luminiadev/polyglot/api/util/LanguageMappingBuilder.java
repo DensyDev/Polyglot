@@ -15,6 +15,6 @@ public final class LanguageMappingBuilder {
     }
 
     public LanguageStrategy build() {
-        return LanguageStrategy.mappings(mappings);
+        return LanguageStrategy.mappingsOf(mappings);
     }
 }

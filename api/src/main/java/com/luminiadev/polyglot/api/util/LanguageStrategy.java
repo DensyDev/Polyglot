@@ -34,7 +34,7 @@ public interface LanguageStrategy {
      * @param mappings the map with language mappings
      * @return strategy based on passed mappings
      */
-    static LanguageStrategy mappings(Map<Language, Language> mappings) {
+    static LanguageStrategy mappingsOf(Map<Language, Language> mappings) {
         return missingLanguage -> mappings.getOrDefault(missingLanguage, null);
     }
 
@@ -43,7 +43,7 @@ public interface LanguageStrategy {
      *
      * @return crated LanguageMappingBuilder
      */
-    static LanguageMappingBuilder mappings() {
+    static LanguageMappingBuilder mappingsBuilder() {
         return new LanguageMappingBuilder();
     }
 }

@@ -29,7 +29,7 @@ translation.setDefaultLanguage(SimpleLanguage.ENG); // Default language
 
 // Strategy for determining the language when the requested language is not available. 
 // For example: return Russian when Ukrainian is not available, instead of the default English.
-translation.setLanguageStrategy(LanguageStrategy.mappings()
+translation.setLanguageStrategy(LanguageStrategy.mappingsBuilder()
                 .put(SimpleLanguage.UKR, SimpleLanguage.RUS)
                 .build());
 // We can also set the default language using `LanguageStrategy.defaultResult(SimpleLanguage.ENG)`.
