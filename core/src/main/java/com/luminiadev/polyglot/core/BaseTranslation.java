@@ -7,6 +7,7 @@ import com.luminiadev.polyglot.api.language.Language;
 import com.luminiadev.polyglot.api.parameter.TrParameters;
 import com.luminiadev.polyglot.api.parameter.formatter.TrParameterFormatter;
 import com.luminiadev.polyglot.api.provider.TranslationProvider;
+import com.luminiadev.polyglot.api.util.LanguageStrategy;
 import com.luminiadev.polyglot.core.parameter.KeyedTrParameters;
 import com.luminiadev.polyglot.core.parameter.SimpleTrParameters;
 import com.luminiadev.polyglot.core.parameter.formatter.BraceKeyedParameterFormatter;
@@ -27,6 +28,7 @@ public class BaseTranslation implements Translation {
     private final Map<Class<? extends TrParameters>, TrParameterFormatter> formatters;
 
     private Language defaultLanguage;
+    private LanguageStrategy languageStrategy;
     private FallbackStrategy fallbackStrategy;
 
     public BaseTranslation(TranslationContext context, TranslationProvider provider) {
@@ -70,10 +72,23 @@ public class BaseTranslation implements Translation {
         if (this.isLanguageAvailable(requestedLanguage)) {
             return requestedLanguage;
         }
+
+        Language candidateLanguage = requestedLanguage;
+        while (true) {
+            candidateLanguage = this.languageStrategy != null ? this.languageStrategy.get(candidateLanguage) : null;
+            if (candidateLanguage == null) {
+                break;
+            }
+            if (this.isLanguageAvailable(candidateLanguage)) {
+                return candidateLanguage;
+            }
+        }
+
         Language defaultLanguage = this.defaultLanguage != null ? this.defaultLanguage : context.getDefaultLanguage();
         if (this.isLanguageAvailable(defaultLanguage)) {
             return defaultLanguage;
         }
+
         return requestedLanguage;
     }
 
@@ -161,6 +176,11 @@ public class BaseTranslation implements Translation {
     @Override
     public void setDefaultLanguage(Language language) {
         this.defaultLanguage = language;
+    }
+
+    @Override
+    public void setLanguageStrategy(LanguageStrategy languageStrategy) {
+        this.languageStrategy = languageStrategy;
     }
 
     @Override
