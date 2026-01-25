@@ -1,9 +1,8 @@
 package org.densy.polyglot.core.formatter;
 
-import org.densy.polyglot.api.Translation;
 import org.densy.polyglot.api.context.TranslationContext;
+import org.densy.polyglot.api.formatter.context.TranslationFormatContext;
 import org.densy.polyglot.api.formatter.TranslationFormatter;
-import org.densy.polyglot.api.parameter.TranslationParameters;
 import org.densy.polyglot.core.parameter.KeyedTranslationParameters;
 
 import java.util.Map;
@@ -29,9 +28,9 @@ public class PatternKeyedParameterFormatter implements TranslationFormatter {
     }
 
     @Override
-    public String format(String text, Translation translation, TranslationParameters parameters) {
+    public String format(String text, TranslationFormatContext formatContext) {
         KeyedTranslationParameters keyedParams;
-        if (parameters instanceof KeyedTranslationParameters keyedTrParameters) {
+        if (formatContext.getParameters() instanceof KeyedTranslationParameters keyedTrParameters) {
             KeyedTranslationParameters merged = new KeyedTranslationParameters(context.getGlobalParameters());
             merged = merged.merge(keyedTrParameters);
             keyedParams = merged;

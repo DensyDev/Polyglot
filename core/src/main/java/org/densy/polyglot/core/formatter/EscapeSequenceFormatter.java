@@ -1,8 +1,7 @@
 package org.densy.polyglot.core.formatter;
 
-import org.densy.polyglot.api.Translation;
+import org.densy.polyglot.api.formatter.context.TranslationFormatContext;
 import org.densy.polyglot.api.formatter.TranslationFormatter;
-import org.densy.polyglot.api.parameter.TranslationParameters;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,7 +22,7 @@ public class EscapeSequenceFormatter implements TranslationFormatter {
     private static final Pattern ESCAPE_PATTERN = Pattern.compile("\\\\+");
 
     @Override
-    public String format(String text, Translation translation, TranslationParameters parameters) {
+    public String format(String text, TranslationFormatContext context) {
         Matcher matcher = ESCAPE_PATTERN.matcher(text);
         StringBuilder result = new StringBuilder();
 

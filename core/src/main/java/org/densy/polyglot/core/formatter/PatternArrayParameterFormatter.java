@@ -1,7 +1,6 @@
 package org.densy.polyglot.core.formatter;
 
-import org.densy.polyglot.api.Translation;
-import org.densy.polyglot.api.parameter.TranslationParameters;
+import org.densy.polyglot.api.formatter.context.TranslationFormatContext;
 import org.densy.polyglot.api.formatter.TranslationFormatter;
 import org.densy.polyglot.core.parameter.ArrayTranslationParameters;
 
@@ -25,8 +24,8 @@ public class PatternArrayParameterFormatter implements TranslationFormatter {
     }
 
     @Override
-    public String format(String text, Translation translation, TranslationParameters parameters) {
-        if (!(parameters instanceof ArrayTranslationParameters simpleParams)) {
+    public String format(String text, TranslationFormatContext context) {
+        if (!(context.getParameters() instanceof ArrayTranslationParameters simpleParams)) {
             return text;
         }
 

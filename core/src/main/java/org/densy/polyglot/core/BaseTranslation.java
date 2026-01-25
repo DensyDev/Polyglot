@@ -9,8 +9,10 @@ import org.densy.polyglot.api.provider.TranslationProvider;
 import org.densy.polyglot.api.util.FallbackStrategy;
 import org.densy.polyglot.api.util.LanguageStrategy;
 import org.densy.polyglot.core.formatter.EscapeSequenceFormatter;
+import org.densy.polyglot.core.formatter.NestedTranslationFormatter;
 import org.densy.polyglot.core.formatter.PatternArrayParameterFormatter;
 import org.densy.polyglot.core.formatter.PatternKeyedParameterFormatter;
+import org.densy.polyglot.core.formatter.context.TranslationFormatContextImpl;
 import org.densy.polyglot.core.parameter.ArrayTranslationParameters;
 import org.jetbrains.annotations.UnmodifiableView;
 
@@ -34,10 +36,12 @@ public class BaseTranslation implements Translation {
         this.translations = new HashMap<>();
         this.formatters = new ArrayList<>();
 
+        // Adding default formatters.
         // Order is important: the array parameter formatter
         // must be before the keyed parameter formatter.
         this.addFormatter(new PatternArrayParameterFormatter());
         this.addFormatter(new PatternKeyedParameterFormatter(context));
+        this.addFormatter(new NestedTranslationFormatter());
         this.addFormatter(new EscapeSequenceFormatter());
 
         if (provider != null) {
@@ -61,7 +65,7 @@ public class BaseTranslation implements Translation {
             translation = fallbackStrategy != null ? fallbackStrategy.get(key) : key;
         }
 
-        return applyParameters(translation, parameters);
+        return applyParameters(language, key, translation, parameters);
     }
 
     @Override
@@ -137,12 +141,14 @@ public class BaseTranslation implements Translation {
         return null;
     }
 
-    protected String applyParameters(String text, TranslationParameters parameters) {
+    protected String applyParameters(Language language, String key, String text, TranslationParameters parameters) {
         if (text == null) return null;
+
+        var context = new TranslationFormatContextImpl(key, language, this, parameters);
 
         String result = text;
         for (TranslationFormatter formatter : formatters) {
-            result = formatter.format(result, this, parameters);
+            result = formatter.format(result, context);
         }
 
         return result;
