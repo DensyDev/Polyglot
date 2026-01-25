@@ -12,7 +12,7 @@ java {
 
 allprojects {
     group = "org.densy.polyglot"
-    version = "1.0.5-SNAPSHOT"
+    version = "1.1.0-SNAPSHOT"
 }
 
 subprojects {
@@ -26,6 +26,7 @@ subprojects {
     }
 
     dependencies {
+        compileOnlyApi("org.jetbrains:annotations:24.1.0")
         compileOnlyApi("org.projectlombok:lombok:1.18.38")
         annotationProcessor("org.projectlombok:lombok:1.18.38")
     }

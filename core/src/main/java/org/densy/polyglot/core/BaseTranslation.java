@@ -1,22 +1,22 @@
 package org.densy.polyglot.core;
 
-import org.densy.polyglot.api.util.FallbackStrategy;
 import org.densy.polyglot.api.Translation;
 import org.densy.polyglot.api.context.TranslationContext;
+import org.densy.polyglot.api.formatter.TranslationFormatter;
 import org.densy.polyglot.api.language.Language;
-import org.densy.polyglot.api.parameter.TrParameters;
-import org.densy.polyglot.api.parameter.formatter.TrParameterFormatter;
+import org.densy.polyglot.api.parameter.TranslationParameters;
 import org.densy.polyglot.api.provider.TranslationProvider;
+import org.densy.polyglot.api.util.FallbackStrategy;
 import org.densy.polyglot.api.util.LanguageStrategy;
-import org.densy.polyglot.core.parameter.KeyedTrParameters;
-import org.densy.polyglot.core.parameter.SimpleTrParameters;
-import org.densy.polyglot.core.parameter.formatter.BraceKeyedParameterFormatter;
-import org.densy.polyglot.core.parameter.formatter.BracketSimpleParameterFormatter;
+import org.densy.polyglot.core.formatter.EscapeSequenceFormatter;
+import org.densy.polyglot.core.formatter.NestedTranslationFormatter;
+import org.densy.polyglot.core.formatter.PatternArrayParameterFormatter;
+import org.densy.polyglot.core.formatter.PatternKeyedParameterFormatter;
+import org.densy.polyglot.core.formatter.context.TranslationFormatContextImpl;
+import org.densy.polyglot.core.parameter.ArrayTranslationParameters;
+import org.jetbrains.annotations.UnmodifiableView;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Base implementation of the translation.
@@ -25,7 +25,7 @@ public class BaseTranslation implements Translation {
 
     private final TranslationContext context;
     private final Map<Language, Map<String, String>> translations;
-    private final Map<Class<? extends TrParameters>, TrParameterFormatter> formatters;
+    private final List<TranslationFormatter> formatters;
 
     private Language defaultLanguage;
     private LanguageStrategy languageStrategy;
@@ -34,10 +34,15 @@ public class BaseTranslation implements Translation {
     public BaseTranslation(TranslationContext context, TranslationProvider provider) {
         this.context = context;
         this.translations = new HashMap<>();
-        this.formatters = new HashMap<>();
+        this.formatters = new ArrayList<>();
 
-        this.formatters.put(SimpleTrParameters.class, new BracketSimpleParameterFormatter());
-        this.formatters.put(KeyedTrParameters.class, new BraceKeyedParameterFormatter());
+        // Adding default formatters.
+        // Order is important: the array parameter formatter
+        // must be before the keyed parameter formatter.
+        this.addFormatter(new PatternArrayParameterFormatter());
+        this.addFormatter(new PatternKeyedParameterFormatter(context));
+        this.addFormatter(new NestedTranslationFormatter());
+        this.addFormatter(new EscapeSequenceFormatter());
 
         if (provider != null) {
             translations.putAll(provider.getTranslations());
@@ -48,11 +53,11 @@ public class BaseTranslation implements Translation {
 
     @Override
     public String translate(Language language, String key) {
-        return translate(language, key, (TrParameters) null);
+        return translate(language, key, (TranslationParameters) null);
     }
 
     @Override
-    public String translate(Language language, String key, TrParameters parameters) {
+    public String translate(Language language, String key, TranslationParameters parameters) {
         Language targetLanguage = resolveLanguage(language);
         String translation = findTranslation(targetLanguage, key);
 
@@ -60,12 +65,12 @@ public class BaseTranslation implements Translation {
             translation = fallbackStrategy != null ? fallbackStrategy.get(key) : key;
         }
 
-        return applyParameters(translation, parameters);
+        return applyParameters(language, key, translation, parameters);
     }
 
     @Override
     public String translate(Language language, String key, Object... parameters) {
-        return translate(language, key, new SimpleTrParameters(parameters));
+        return translate(language, key, new ArrayTranslationParameters(parameters));
     }
 
     private Language resolveLanguage(Language requestedLanguage) {
@@ -136,33 +141,14 @@ public class BaseTranslation implements Translation {
         return null;
     }
 
-    protected String applyParameters(String text, TrParameters parameters) {
+    protected String applyParameters(Language language, String key, String text, TranslationParameters parameters) {
         if (text == null) return null;
 
+        var context = new TranslationFormatContextImpl(key, language, this, parameters);
+
         String result = text;
-
-        if (parameters instanceof SimpleTrParameters) {
-            TrParameterFormatter simpleFormatter = formatters.get(SimpleTrParameters.class);
-            if (simpleFormatter != null) {
-                result = simpleFormatter.format(result, parameters);
-            }
-        }
-
-        KeyedTrParameters keyedParams;
-
-        if (parameters instanceof KeyedTrParameters keyedTrParameters) {
-            KeyedTrParameters merged = new KeyedTrParameters(context.getGlobalParameters());
-            merged = merged.merge(keyedTrParameters);
-            keyedParams = merged;
-        } else {
-            keyedParams = new KeyedTrParameters(context.getGlobalParameters());
-        }
-
-        if (keyedParams != null && !keyedParams.getParameters().isEmpty()) {
-            TrParameterFormatter keyedFormatter = formatters.get(KeyedTrParameters.class);
-            if (keyedFormatter != null) {
-                result = keyedFormatter.format(result, keyedParams);
-            }
+        for (TranslationFormatter formatter : formatters) {
+            result = formatter.format(result, context);
         }
 
         return result;
@@ -189,18 +175,54 @@ public class BaseTranslation implements Translation {
     }
 
     @Override
+    public @UnmodifiableView Map<Language, Map<String, String>> getTranslations() {
+        return Collections.unmodifiableMap(translations);
+    }
+
+    @Override
     public void addTranslation(Language language, String key, String value) {
         if (language == null || key == null || value == null) {
             return;
         }
-        translations.computeIfAbsent(language, k -> new HashMap<>()).put(key, value);
+        this.translations.computeIfAbsent(language, k -> new HashMap<>()).put(key, value);
     }
 
     @Override
-    public <T extends TrParameters> void setParameterFormatter(Class<T> parameterType, TrParameterFormatter formatter) {
-        if (parameterType != null && formatter != null) {
-            formatters.put(parameterType, formatter);
+    public void addTranslations(Language language, Map<String, String> translations) {
+        if (language == null || translations == null) {
+            return;
         }
+        this.translations.computeIfAbsent(language, k -> new HashMap<>()).putAll(translations);
+    }
+
+    @Override
+    public void removeTranslation(Language language, String key) {
+        if (language == null || key == null) {
+            return;
+        }
+        if (!translations.containsKey(language)) {
+            return;
+        }
+        translations.get(language).remove(key);
+        // remove empty language map
+        if  (translations.get(language).isEmpty()) {
+            translations.remove(language);
+        }
+    }
+
+    @Override
+    public @UnmodifiableView List<TranslationFormatter> getFormatters() {
+        return Collections.unmodifiableList(formatters);
+    }
+
+    @Override
+    public void addFormatter(TranslationFormatter formatter) {
+        formatters.add(formatter);
+    }
+
+    @Override
+    public void removeFormatter(TranslationFormatter formatter) {
+        formatters.remove(formatter);
     }
 
     @Override

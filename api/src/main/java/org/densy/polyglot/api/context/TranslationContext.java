@@ -45,7 +45,7 @@ public interface TranslationContext {
     /**
      * Adds global parameter available to all translations.
      *
-     * @param key the parameter key
+     * @param key   the parameter key
      * @param value the parameter value to add
      */
     void addGlobalParameter(String key, Object value);
@@ -67,7 +67,7 @@ public interface TranslationContext {
     /**
      * Adds global translations for a language.
      *
-     * @param language the target language
+     * @param language     the target language
      * @param translations the translations to add
      */
     void addGlobalTranslations(Language language, Map<String, String> translations);
@@ -75,8 +75,8 @@ public interface TranslationContext {
     /**
      * Adds global translation for a language.
      *
-     * @param language the target language
-     * @param key the message key
+     * @param language    the target language
+     * @param key         the message key
      * @param translation the translation
      */
     void addGlobalTranslation(Language language, String key, String translation);
