@@ -6,6 +6,7 @@ import org.densy.polyglot.api.language.Language;
 import org.densy.polyglot.api.language.LanguageStandard;
 import org.densy.polyglot.api.provider.TranslationProvider;
 import org.densy.polyglot.core.BaseTranslation;
+import org.densy.polyglot.core.language.LocaleLanguageStandard;
 import org.densy.polyglot.core.language.SimpleLanguageStandard;
 import org.densy.polyglot.core.parameter.KeyedTranslationParameters;
 import org.densy.polyglot.core.provider.EmptyProvider;
@@ -26,7 +27,7 @@ public class BaseTranslationContext implements TranslationContext {
     public BaseTranslationContext() {
         this.globalTranslations = new HashMap<>();
         this.globalParameters = new KeyedTranslationParameters();
-        this.languageStandard = new SimpleLanguageStandard();
+        this.languageStandard = new LocaleLanguageStandard();
     }
 
     @Override
