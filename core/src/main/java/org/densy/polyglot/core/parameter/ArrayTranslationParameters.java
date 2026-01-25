@@ -7,11 +7,11 @@ import org.densy.polyglot.api.parameter.TranslationParameters;
  * Simple indexed translation parameters.
  */
 @Getter
-public class ArrayTrParameters implements TranslationParameters {
+public class ArrayTranslationParameters implements TranslationParameters {
 
     private final Object[] parameters;
 
-    public ArrayTrParameters(Object... parameters) {
+    public ArrayTranslationParameters(Object... parameters) {
         this.parameters = parameters;
     }
 }

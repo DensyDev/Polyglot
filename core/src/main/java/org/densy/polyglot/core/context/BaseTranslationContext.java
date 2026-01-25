@@ -7,7 +7,7 @@ import org.densy.polyglot.api.language.LanguageStandard;
 import org.densy.polyglot.api.provider.TranslationProvider;
 import org.densy.polyglot.core.BaseTranslation;
 import org.densy.polyglot.core.language.SimpleLanguageStandard;
-import org.densy.polyglot.core.parameter.KeyedTrParameters;
+import org.densy.polyglot.core.parameter.KeyedTranslationParameters;
 import org.densy.polyglot.core.provider.EmptyProvider;
 
 import java.util.HashMap;
@@ -19,13 +19,13 @@ import java.util.Map;
 public class BaseTranslationContext implements TranslationContext {
 
     private final Map<Language, Map<String, String>> globalTranslations;
-    private KeyedTrParameters globalParameters;
+    private KeyedTranslationParameters globalParameters;
     private Language defaultLanguage;
     private LanguageStandard languageStandard;
 
     public BaseTranslationContext() {
         this.globalTranslations = new HashMap<>();
-        this.globalParameters = new KeyedTrParameters();
+        this.globalParameters = new KeyedTranslationParameters();
         this.languageStandard = new SimpleLanguageStandard();
     }
 
@@ -46,7 +46,7 @@ public class BaseTranslationContext implements TranslationContext {
 
     @Override
     public void addGlobalParameters(Map<String, Object> parameters) {
-        this.globalParameters = this.globalParameters.merge(new KeyedTrParameters(parameters));
+        this.globalParameters = this.globalParameters.merge(new KeyedTranslationParameters(parameters));
     }
 
     @Override

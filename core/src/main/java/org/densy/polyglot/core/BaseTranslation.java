@@ -8,9 +8,10 @@ import org.densy.polyglot.api.parameter.TranslationParameters;
 import org.densy.polyglot.api.provider.TranslationProvider;
 import org.densy.polyglot.api.util.FallbackStrategy;
 import org.densy.polyglot.api.util.LanguageStrategy;
+import org.densy.polyglot.core.formatter.EscapeSequenceFormatter;
 import org.densy.polyglot.core.formatter.PatternArrayParameterFormatter;
 import org.densy.polyglot.core.formatter.PatternKeyedParameterFormatter;
-import org.densy.polyglot.core.parameter.ArrayTrParameters;
+import org.densy.polyglot.core.parameter.ArrayTranslationParameters;
 import org.jetbrains.annotations.UnmodifiableView;
 
 import java.util.*;
@@ -37,6 +38,7 @@ public class BaseTranslation implements Translation {
         // must be before the keyed parameter formatter.
         this.addFormatter(new PatternArrayParameterFormatter());
         this.addFormatter(new PatternKeyedParameterFormatter(context));
+        this.addFormatter(new EscapeSequenceFormatter());
 
         if (provider != null) {
             translations.putAll(provider.getTranslations());
@@ -64,7 +66,7 @@ public class BaseTranslation implements Translation {
 
     @Override
     public String translate(Language language, String key, Object... parameters) {
-        return translate(language, key, new ArrayTrParameters(parameters));
+        return translate(language, key, new ArrayTranslationParameters(parameters));
     }
 
     private Language resolveLanguage(Language requestedLanguage) {

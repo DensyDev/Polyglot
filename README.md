@@ -9,7 +9,8 @@ import org.densy.polyglot.api.util.LanguageStrategy;
 import org.densy.polyglot.common.language.SimpleLanguage;
 import org.densy.polyglot.core.context.BaseTranslationContext;
 import org.densy.polyglot.core.language.SimpleLanguageStandard;
-import org.densy.polyglot.core.parameter.KeyedTrParameters;
+import org.densy.polyglot.core.parameter.KeyedTranslationParameters;
+import org.densy.polyglot.core.parameter.TrParameters;
 import org.densy.polyglot.core.provider.YamlFileProvider;
 
 import java.io.File;
@@ -46,7 +47,7 @@ translation.addTranslation(SimpleLanguage.ENG, "local.translation", "Local messa
 
 // Translating the messages
 String local = translation.translate(SimpleLanguage.RUS, "local.translation", 1);
-String global = translation.translate(SimpleLanguage.RUS, "global.translation", new KeyedTrParameters().put("local", "Parameter"));
+String global = translation.translate(SimpleLanguage.RUS, "global.translation", TrParameters.keyed().put("local", "Parameter"));
 
 System.out.println("Translated local message: " + local);
 System.out.println("Translated global message: " + global);
@@ -68,7 +69,7 @@ Adding a library api:
 <dependency>
     <groupId>org.densy.polyglot</groupId>
     <artifactId>api</artifactId>
-    <version>1.0.5-SNAPSHOT</version>
+    <vearsion>1.0.5-SNAPSHOT</vearsion>
 </dependency>
 ```
 
