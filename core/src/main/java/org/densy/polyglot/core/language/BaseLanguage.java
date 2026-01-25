@@ -1,8 +1,11 @@
 package org.densy.polyglot.core.language;
 
-import org.densy.polyglot.api.language.Language;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.densy.polyglot.api.language.Language;
+
+import java.util.Locale;
+import java.util.Objects;
 
 /**
  * Base implementation of the Language interface.
@@ -59,11 +62,43 @@ public class BaseLanguage implements Language {
      * @return BaseLanguage class
      */
     public static BaseLanguage parseLanguage(String languageCode) {
+        Objects.requireNonNull(languageCode, "language code must not be null");
         if (languageCode.contains("_")) {
             String[] parts = languageCode.split("_");
             return new BaseLanguage(parts[0], parts[1]);
-        } else  {
+        } else {
             return new BaseLanguage(languageCode);
         }
+    }
+
+    /**
+     * Parses the language from locale.
+     *
+     * @param locale the locale
+     * @return BaseLanguage class
+     */
+    public static BaseLanguage parseLocale(Locale locale) {
+        Objects.requireNonNull(locale, "locale must not be null");
+
+        String language = locale.getISO3Country();
+        String country = locale.getCountry();
+
+        if (language.isEmpty() && country.isEmpty()) {
+            throw new IllegalArgumentException("Locale must have at least language or country");
+        }
+
+        if (!country.isEmpty()) {
+            return new BaseLanguage(language, country);
+        }
+        return new BaseLanguage(language);
+    }
+
+    /**
+     * Gets the default system language.
+     *
+     * @return BaseLanguage class.
+     */
+    public static BaseLanguage getDefault() {
+        return parseLocale(Locale.getDefault());
     }
 }

@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 /**
  * Locale language standard implementation.
- * Supports format: "ru_RU", "en_US", "en_GB" (language_COUNTRY).
+ * Supports format: "en_US", "en_GB", "ru_RU" (language_COUNTRY).
  */
 public class LocaleLanguageStandard implements LanguageStandard {
     private static final Pattern PATTERN = Pattern.compile("^([a-z]{2})_([A-Z]{2})$");
