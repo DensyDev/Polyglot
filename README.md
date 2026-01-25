@@ -69,7 +69,7 @@ Adding a library api:
 <dependency>
     <groupId>org.densy.polyglot</groupId>
     <artifactId>api</artifactId>
-    <vearsion>1.0.5-SNAPSHOT</vearsion>
+    <vearsion>1.1.1-SNAPSHOT</vearsion>
 </dependency>
 ```
 
@@ -78,7 +78,7 @@ Adding a library implementation:
 <dependency>
     <groupId>org.densy.polyglot</groupId>
     <artifactId>core</artifactId>
-    <version>1.0.5-SNAPSHOT</version>
+    <version>1.1.1-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -93,10 +93,10 @@ maven {
 
 Adding a library api:
 ```groovy
-implementation "org.densy.polyglot:api:1.0.5-SNAPSHOT"
+implementation "org.densy.polyglot:api:1.1.1-SNAPSHOT"
 ```
 
 Adding a library implementation:
 ```groovy
-implementation "org.densy.polyglot:core:1.0.5-SNAPSHOT"
+implementation "org.densy.polyglot:core:1.1.1-SNAPSHOT"
 ```
