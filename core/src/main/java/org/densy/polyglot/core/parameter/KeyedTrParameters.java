@@ -1,8 +1,7 @@
 package org.densy.polyglot.core.parameter;
 
-import org.densy.polyglot.api.parameter.TrParameters;
-import org.densy.polyglot.api.parameter.formatter.TrParameterFormatter;
 import lombok.Getter;
+import org.densy.polyglot.api.parameter.TranslationParameters;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +10,7 @@ import java.util.Map;
  * Key-value translation parameters.
  */
 @Getter
-public class KeyedTrParameters implements TrParameters {
+public class KeyedTrParameters implements TranslationParameters {
 
     private final Map<String, Object> parameters;
 
@@ -26,11 +25,6 @@ public class KeyedTrParameters implements TrParameters {
     public KeyedTrParameters put(String key, Object value) {
         parameters.put(key, value);
         return this;
-    }
-
-    @Override
-    public String applyTo(String text, TrParameterFormatter formatter) {
-        return formatter.format(text, this);
     }
 
     /**
