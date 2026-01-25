@@ -3,14 +3,14 @@ Polyglot is an advanced and multifunctional library for localizing strings.
 
 ## Example of usage
 ```java
-import com.luminiadev.polyglot.api.Translation;
-import com.luminiadev.polyglot.api.context.TranslationContext;
-import com.luminiadev.polyglot.api.util.FallbackStrategy;
-import com.luminiadev.polyglot.api.util.LanguageStrategy;
-import com.luminiadev.polyglot.common.language.SimpleLanguage;
-import com.luminiadev.polyglot.core.context.BaseTranslationContext;
-import com.luminiadev.polyglot.core.language.SimpleLanguageStandard;
-import com.luminiadev.polyglot.core.provider.YamlFileProvider;
+import org.densy.polyglot.api.Translation;
+import org.densy.polyglot.api.context.TranslationContext;
+import org.densy.polyglot.api.util.LanguageStrategy;
+import org.densy.polyglot.common.language.SimpleLanguage;
+import org.densy.polyglot.core.context.BaseTranslationContext;
+import org.densy.polyglot.core.language.SimpleLanguageStandard;
+import org.densy.polyglot.core.parameter.KeyedTrParameters;
+import org.densy.polyglot.core.provider.YamlFileProvider;
 
 import java.io.File;
 
@@ -52,5 +52,50 @@ System.out.println("Translated local message: " + local);
 System.out.println("Translated global message: " + global);
 ```
 
-## Dependency info on Luminia Dev Repo:
-https://repo.luminiadev.com/#/private/com/luminiadev/polyglot
+## Maven
+Adding repository:
+```xml
+<repositories>
+    <repository>
+        <id>densy-repository-snapshots</id>
+        <url>https://repo.densy.org/snapshots</url>
+    </repository>
+</repositories>
+```
+
+Adding a library api:
+```xml
+<dependency>
+    <groupId>org.densy.polyglot</groupId>
+    <artifactId>api</artifactId>
+    <version>1.0.5-SNAPSHOT</version>
+</dependency>
+```
+
+Adding a library implementation:
+```xml
+<dependency>
+    <groupId>org.densy.polyglot</groupId>
+    <artifactId>core</artifactId>
+    <version>1.0.5-SNAPSHOT</version>
+</dependency>
+```
+
+## Gradle
+Adding repository:
+```groovy
+maven {
+    name = "densyRepositorySnapshots"
+    url = uri("https://repo.densy.org/snapshots")
+}
+```
+
+Adding a library api:
+```groovy
+implementation "org.densy.polyglot:api:1.0.5-SNAPSHOT"
+```
+
+Adding a library implementation:
+```groovy
+implementation "org.densy.polyglot:core:1.0.5-SNAPSHOT"
+```

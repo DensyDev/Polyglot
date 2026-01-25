@@ -11,7 +11,7 @@ java {
 }
 
 allprojects {
-    group = "com.luminiadev.polyglot"
+    group = "org.densy.polyglot"
     version = "1.0.5-SNAPSHOT"
 }
 
@@ -41,8 +41,8 @@ subprojects {
         }
         repositories {
             maven {
-                name = "luminiadev"
-                url = uri("https://repo.luminiadev.com/private")
+                name = "densy"
+                url = uri("https://repo.densy.org/snapshots")
                 credentials {
                     username = System.getenv("MAVEN_USERNAME")
                     password = System.getenv("MAVEN_PASSWORD")

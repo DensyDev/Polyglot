@@ -1,38 +1,21 @@
-LUMINIA DEVELOPMENT CLOSED SOURCE LICENSE (LD-CSL)
-Version 1.0 — 2025
+MIT License
 
-Copyright © 2025 Luminia Development and its members
-Website: https://luminiadev.com
-GitHub: https://github.com/luminiaDev/
+Copyright (c) 2026 Densy Development
 
-1. License Grant
-This software, including but not limited to its source code, binaries, documentation, and any related materials (hereinafter referred to as the "Software"), is proprietary and confidential to Luminia Development and its members. Unless explicitly stated otherwise in a written agreement signed by Luminia Development, no rights are granted to use, copy, modify, distribute, or otherwise exploit the Software in any form.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-2. Restrictions
-Without prior written permission from Luminia Development, the following actions are strictly prohibited:
-- Distribution, publication, sublicensing, or otherwise making the Software available to any third parties.
-- Use of the Software, whether in part or in whole, for any commercial purposes.
-- Reverse engineering, decompilation, disassembly, or any other attempt to derive the source code of the Software if delivered in binary form.
-- Execution, deployment, or running of the Software in any environment not explicitly authorized by Luminia Development.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-These restrictions apply equally to both the source code and compiled binaries of the Software.
-
-3. Permission and Revocation
-Written permission for specific use of the Software may be granted by Luminia Development. Any such permission may be revoked by Luminia Development at any time, without notice and without the need to provide justification. Upon revocation, all rights previously granted shall immediately terminate, and any continued use of the Software will constitute a violation of this License.
-
-4. Ownership
-All intellectual property rights in and to the Software remain the exclusive property of Luminia Development and its members. Nothing in this License shall be interpreted as a transfer of ownership or as granting any implied rights not expressly stated herein.
-
-5. No Warranty
-The Software is provided "AS IS" and without any warranty of any kind, whether express or implied. This includes but is not limited to implied warranties of merchantability, fitness for a particular purpose, or non-infringement. Luminia Development makes no guarantee that the Software will function without error, interruption, or defects.
-
-6. Limitation of Liability
-In no event shall Luminia Development or its members be held liable for any damages, including but not limited to direct, indirect, incidental, or consequential damages, arising out of the use, misuse, or inability to use the Software, even if advised of the possibility of such damages.
-
-7. Governing Law and Jurisdiction
-This License shall be governed by and construed in accordance with the laws of the Russian Federation. Any disputes, claims, or legal proceedings arising out of or related to this License shall fall under the exclusive jurisdiction of the Arbitration Court of the city of Vladivostok. By using the Software, you agree to submit to the personal and exclusive jurisdiction of this court for the resolution of any disputes.
-
-8. Copyright Protection
-Any infringement of intellectual property rights relating to the Software shall be prosecuted in accordance with applicable law. Luminia Development actively enforces its rights and will submit formal notices of violation, including but not limited to Digital Millennium Copyright Act (DMCA) takedown requests, to hosting providers, code repositories, or other third parties in order to remove unauthorized content and prevent further violations.
-
-End of License
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
