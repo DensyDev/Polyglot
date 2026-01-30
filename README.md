@@ -53,6 +53,10 @@ System.out.println("Translated local message: " + local);
 System.out.println("Translated global message: " + global);
 ```
 
+> [!NOTE] 
+> If you want to work with the library in Kotlin, check out this extension:
+> https://github.com/DensyDev/Polyglot-Kotlin-Extension
+
 ## Maven
 Adding repository:
 ```xml
