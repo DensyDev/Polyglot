@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import org.densy.polyglot.api.language.Language;
 import org.densy.polyglot.api.language.LanguageStandard;
 import org.densy.polyglot.api.provider.TranslationProvider;
+import org.densy.polyglot.core.util.ProviderUtils;
 
 import java.io.File;
 import java.io.FileReader;
@@ -48,10 +49,10 @@ public class JsonFileProvider implements TranslationProvider {
 
                 if (languageStandard.matches(languageString)) {
                     Language language = languageStandard.parseLanguage(languageString);
-                    Map<String, Object> data = gson.fromJson(new FileReader(file), new TypeToken<Map<String, Object>>() {
+                    Map<String, Object> translations = gson.fromJson(new FileReader(file), new TypeToken<Map<String, Object>>() {
                     }.getType());
-                    Map<String, String> flattenedTranslations = flattenMap(data, "");
-                    translations.put(language, flattenedTranslations);
+                    Map<String, String> flattenedTranslations = ProviderUtils.flattenMap(translations, "");
+                    this.translations.put(language, flattenedTranslations);
                 }
             } catch (IOException e) {
                 throw new RuntimeException("Error loading translation file: " + file.getName(), e);
@@ -59,24 +60,6 @@ public class JsonFileProvider implements TranslationProvider {
                 throw new RuntimeException("Error parsing translation file: " + file.getName(), e);
             }
         }
-    }
-
-    @SuppressWarnings("unchecked")
-    private Map<String, String> flattenMap(Map<String, Object> map, String prefix) {
-        Map<String, String> flattened = new HashMap<>();
-
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
-            String key = prefix.isEmpty() ? entry.getKey() : prefix + "." + entry.getKey();
-            Object value = entry.getValue();
-
-            if (value instanceof Map) {
-                flattened.putAll(flattenMap((Map<String, Object>) value, key));
-            } else {
-                flattened.put(key, String.valueOf(value));
-            }
-        }
-
-        return flattened;
     }
 
     @Override

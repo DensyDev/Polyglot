@@ -80,7 +80,7 @@ public class BaseLanguage implements Language {
     public static BaseLanguage parseLocale(Locale locale) {
         Objects.requireNonNull(locale, "locale must not be null");
 
-        String language = locale.getISO3Country();
+        String language = locale.getLanguage();
         String country = locale.getCountry();
 
         if (language.isEmpty() && country.isEmpty()) {
