@@ -3,6 +3,7 @@ package org.densy.polyglot.core.provider;
 import org.densy.polyglot.api.language.Language;
 import org.densy.polyglot.api.language.LanguageStandard;
 import org.densy.polyglot.api.provider.TranslationProvider;
+import org.densy.polyglot.core.util.ProviderUtils;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
@@ -47,9 +48,9 @@ public class YamlFileProvider implements TranslationProvider {
 
                 if (languageStandard.matches(languageString)) {
                     Language language = languageStandard.parseLanguage(languageString);
-                    Map<String, Object> data = yaml.load(new FileInputStream(file));
-                    Map<String, String> flattenedTranslations = flattenMap(data, "");
-                    translations.put(language, flattenedTranslations);
+                    Map<String, Object> translations = yaml.load(new FileInputStream(file));
+                    Map<String, String> flattenedTranslations = ProviderUtils.flattenMap(translations, "");
+                    this.translations.put(language, flattenedTranslations);
                 }
             } catch (IOException e) {
                 throw new RuntimeException("Error loading translation file: " + file.getName(), e);
@@ -57,24 +58,6 @@ public class YamlFileProvider implements TranslationProvider {
                 throw new RuntimeException("Error parsing translation file: " + file.getName(), e);
             }
         }
-    }
-
-    @SuppressWarnings("unchecked")
-    private Map<String, String> flattenMap(Map<String, Object> map, String prefix) {
-        Map<String, String> flattened = new HashMap<>();
-
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
-            String key = prefix.isEmpty() ? entry.getKey() : prefix + "." + entry.getKey();
-            Object value = entry.getValue();
-
-            if (value instanceof Map) {
-                flattened.putAll(flattenMap((Map<String, Object>) value, key));
-            } else {
-                flattened.put(key, String.valueOf(value));
-            }
-        }
-
-        return flattened;
     }
 
     @Override
