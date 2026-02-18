@@ -2,12 +2,9 @@ package org.densy.polyglot.common.language;
 
 import org.densy.polyglot.core.language.BaseLanguage;
 
-/**
- * Built-in languages in a simple format.
- */
 public interface SimpleLanguage {
     BaseLanguage ENG = new BaseLanguage("eng");
-    BaseLanguage GER = new BaseLanguage("ger");
+    BaseLanguage DEU = new BaseLanguage("deu");
     BaseLanguage SPA = new BaseLanguage("spa");
     BaseLanguage FRA = new BaseLanguage("fra");
     BaseLanguage ITA = new BaseLanguage("ita");
@@ -15,19 +12,41 @@ public interface SimpleLanguage {
     BaseLanguage KOR = new BaseLanguage("kor");
     BaseLanguage POR = new BaseLanguage("por");
     BaseLanguage RUS = new BaseLanguage("rus");
-    BaseLanguage CHI = new BaseLanguage("chi");
-    BaseLanguage DUT = new BaseLanguage("dut");
+    BaseLanguage ZHO = new BaseLanguage("zho");
+    BaseLanguage NLD = new BaseLanguage("nld");
     BaseLanguage BUL = new BaseLanguage("bul");
-    BaseLanguage CZE = new BaseLanguage("cze");
+    BaseLanguage CES = new BaseLanguage("ces");
     BaseLanguage DAN = new BaseLanguage("dan");
-    BaseLanguage GRE = new BaseLanguage("gre");
+    BaseLanguage ELL = new BaseLanguage("ell");
     BaseLanguage FIN = new BaseLanguage("fin");
     BaseLanguage HUN = new BaseLanguage("hun");
     BaseLanguage IND = new BaseLanguage("ind");
     BaseLanguage NOR = new BaseLanguage("nor");
     BaseLanguage POL = new BaseLanguage("pol");
-    BaseLanguage SLO = new BaseLanguage("slo");
+    BaseLanguage SLK = new BaseLanguage("slk");
     BaseLanguage SWE = new BaseLanguage("swe");
     BaseLanguage TUR = new BaseLanguage("tur");
     BaseLanguage UKR = new BaseLanguage("ukr");
+    BaseLanguage BEL = new BaseLanguage("bel");
+    BaseLanguage KAZ = new BaseLanguage("kaz");
+    BaseLanguage SLV = new BaseLanguage("slv");
+    BaseLanguage BOS = new BaseLanguage("bos");
+    BaseLanguage MKD = new BaseLanguage("mkd");
+    BaseLanguage VIE = new BaseLanguage("vie");
+    BaseLanguage ARA = new BaseLanguage("ara");
+    BaseLanguage HIN = new BaseLanguage("hin");
+    BaseLanguage BEN = new BaseLanguage("ben");
+    BaseLanguage URD = new BaseLanguage("urd");
+    BaseLanguage THA = new BaseLanguage("tha");
+    BaseLanguage RON = new BaseLanguage("ron");
+    BaseLanguage HRV = new BaseLanguage("hrv");
+    BaseLanguage SRP = new BaseLanguage("srp");
+    BaseLanguage FAS = new BaseLanguage("fas");
+    BaseLanguage HEB = new BaseLanguage("heb");
+    BaseLanguage SWA = new BaseLanguage("swa");
+    BaseLanguage AMH = new BaseLanguage("amh");
+    BaseLanguage TAM = new BaseLanguage("tam");
+    BaseLanguage TEL = new BaseLanguage("tel");
+    BaseLanguage MAR = new BaseLanguage("mar");
+    BaseLanguage FIL = new BaseLanguage("fil");
 }

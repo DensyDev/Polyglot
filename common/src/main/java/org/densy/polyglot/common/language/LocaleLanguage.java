@@ -2,9 +2,6 @@ package org.densy.polyglot.common.language;
 
 import org.densy.polyglot.core.language.BaseLanguage;
 
-/**
- * Built-in languages in standard locale format.
- */
 public interface LocaleLanguage {
     BaseLanguage EN_US = new BaseLanguage("en", "US");
     BaseLanguage EN_GB = new BaseLanguage("en", "GB");
@@ -35,4 +32,26 @@ public interface LocaleLanguage {
     BaseLanguage SV_SE = new BaseLanguage("sv", "SE");
     BaseLanguage TR_TR = new BaseLanguage("tr", "TR");
     BaseLanguage UK_UA = new BaseLanguage("uk", "UA");
+    BaseLanguage BE_BY = new BaseLanguage("be", "BY");
+    BaseLanguage KK_KZ = new BaseLanguage("kk", "KZ");
+    BaseLanguage SL_SI = new BaseLanguage("sl", "SI");
+    BaseLanguage BS_BA = new BaseLanguage("bs", "BA");
+    BaseLanguage MK_MK = new BaseLanguage("mk", "MK");
+    BaseLanguage VI_VN = new BaseLanguage("vi", "VN");
+    BaseLanguage AR_SA = new BaseLanguage("ar", "SA");
+    BaseLanguage HI_IN = new BaseLanguage("hi", "IN");
+    BaseLanguage BN_BD = new BaseLanguage("bn", "BD");
+    BaseLanguage UR_PK = new BaseLanguage("ur", "PK");
+    BaseLanguage TH_TH = new BaseLanguage("th", "TH");
+    BaseLanguage RO_RO = new BaseLanguage("ro", "RO");
+    BaseLanguage HR_HR = new BaseLanguage("hr", "HR");
+    BaseLanguage SR_RS = new BaseLanguage("sr", "RS");
+    BaseLanguage FA_IR = new BaseLanguage("fa", "IR");
+    BaseLanguage HE_IL = new BaseLanguage("he", "IL");
+    BaseLanguage SW_KE = new BaseLanguage("sw", "KE");
+    BaseLanguage AM_ET = new BaseLanguage("am", "ET");
+    BaseLanguage TA_IN = new BaseLanguage("ta", "IN");
+    BaseLanguage TE_IN = new BaseLanguage("te", "IN");
+    BaseLanguage MR_IN = new BaseLanguage("mr", "IN");
+    BaseLanguage FIL_PH = new BaseLanguage("fil", "PH");
 }
